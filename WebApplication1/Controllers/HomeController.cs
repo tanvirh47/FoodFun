@@ -16,7 +16,9 @@ namespace WebApplication1.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            
+            var foodItems = db.FoodItems.ToList(); 
+            return View(foodItems);
         }
 
         public ActionResult About()
