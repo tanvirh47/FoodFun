@@ -23,10 +23,10 @@ namespace WebApplication1.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            var foodItems = db.FoodItems.ToList(); // Assuming FoodItems is the name of your DbSet
+            return View(foodItems);
         }
+
 
         public ActionResult Contact()
         {
@@ -36,7 +36,7 @@ namespace WebApplication1.Controllers
         }
         public ActionResult Menu()
         {
-            var foodItems = db.FoodItems.ToList(); // Assuming FoodItems is the name of your DbSet
+            var foodItems = db.FoodItems.ToList(); 
             return View(foodItems);
         }
         public ActionResult Element()
