@@ -68,12 +68,12 @@
         <div class="row">
             <div class="col-lg-12">
                 <div id="mapBox" class="mapBox"
-                     data-lat="40.701083"
-                     data-lon="-74.1522848"
+                     data-lat="23.7638"
+                     data-lon="90.4062"
                      data-zoom="13"
-                     data-info="PO Box CT16122 Collins Street West, Victoria 8007, Australia."
-                     data-mlat="40.701083"
-                     data-mlon="-74.1522848">
+                     data-info="Ahsanullah University of Science and Technology, 141, &142 Love Rd, Dhaka 1208"
+                     data-mlat="23.7638"
+                     data-mlon="90.4062">
                 </div>
             </div>
         </div>
@@ -89,9 +89,9 @@
                     <div class="into-icon">
                         <i class="fa fa-home"></i>
                     </div>
-                    <div class="info-text">
-                        <h5>California, United States</h5>
-                        <p>Santa monica bullevard</p>
+                    <div class="info-text">   
+                        <h5>Dhaka, Bangladesh</h5>
+                        <p>141, &142 Love Rd, Dhaka 1208</p>
                     </div>
                 </div>
                 <div class="d-flex">
@@ -108,25 +108,51 @@
                         <i class="fa fa-envelope-o"></i>
                     </div>
                     <div class="info-text">
-                        <h5>support@colorlib.com</h5>
+                        <h5>foodfun@gmail.com</h5>
                         <p>Send us your query anytime!</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-9">
-                <form action="#">
+                @using (Html.BeginForm("Contact", "Home", FormMethod.Post))
+                {
                     <div class="left">
-                        <input type="text" placeholder="Enter your name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" required>
-                        <input type="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" required>
-                        <input type="text" placeholder="Enter subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter subject'" required>
+                        <input type="text" name="Name" placeholder="Enter your name" required>
+                        <input type="email" name="Email" placeholder="Enter email address" required>
+                        <input type="text" name="Subject" placeholder="Enter subject" required>
                     </div>
                     <div class="right">
-                        <textarea name="message" cols="20" rows="7" placeholder="Enter Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" required></textarea>
+                        <textarea name="Message" cols="20" rows="7" placeholder="Enter Message" required></textarea>
                     </div>
-                    <button type="submit" class="template-btn">subscribe now</button>
-                </form>
+                    <button type="submit" class="template-btn">Contact Now</button>
+                }
+                @if (ViewBag.SuccessMessage != null)
+                {
+                    <div class="alert alert-success mt-3">@ViewBag.SuccessMessage</div>
+                }
+                @if (ViewBag.ErrorMessage != null)
+                {
+                    <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+                }
             </div>
         </div>
     </div>
 </section>
 <!-- Contact Form End -->
+<!-- JavaScript to Initialize Map -->
+<script>
+    function initMap() {
+        var lat = 23.7638;
+        var lon = 90.4062;
+        var map = L.map('mapBox').setView([lat, lon], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+        L.marker([lat, lon]).addTo(map)
+            .bindPopup('Ahsanullah University of Science and Technology, 141, &142 Love Rd, Dhaka 1208')
+            .openPopup();
+    }
+    window.onload = initMap;
+</script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
