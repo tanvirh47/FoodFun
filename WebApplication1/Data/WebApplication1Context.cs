@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using WebApplication1.Models;
 
 namespace WebApplication1.Data
 {
@@ -19,8 +20,9 @@ namespace WebApplication1.Data
         {
         }
 
-        public System.Data.Entity.DbSet<WebApplication1.Models.userdata> userdatas { get; set; }
-
+ 
         public System.Data.Entity.DbSet<WebApplication1.Models.FoodItem> FoodItems { get; set; }
+        public System.Data.Entity.DbSet<WebApplication1.Models.User> Users { get; set; }
+
     }
 }

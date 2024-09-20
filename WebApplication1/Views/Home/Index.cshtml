@@ -1,280 +1,270 @@
-﻿
-@model IEnumerable<WebApplication1.Models.FoodItem>
+﻿@model IEnumerable<WebApplication1.Models.FoodItem>
 @{
     ViewBag.Title = "Home";
     Layout = "~/Views/_LayoutPage1.cshtml";
 }
 
-<!-- Banner Area Starts -->
-<section class="banner-area text-center">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h6>the most interesting food in the world</h6>
-                <h1>
-                    Discover the <span class="prime-color">flavors</span><br>
-                    <span class="style-change">of <span class="prime-color">food</span>fun</span>
-                </h1>
-            </div>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <!-- Include your CSS files here -->
+    <link rel="stylesheet" href="~/assets01/css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Location Prompt -->
+    <div id="location-container" style="display: none; position: fixed; top: 10px; left: 10px; background-color: rgba(255, 255, 255, 0.8); padding: 10px; border: 1px solid #ccc; border-radius: 5px; color: black; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);">
+        <span id="location-display"></span>
+        <a href="#" id="change-location" style="margin-left: 10px; color: black; text-decoration: underline;">Change</a>
     </div>
-</section>
-<!-- Banner Area End -->
-<!-- Welcome Area Starts -->
-<section class="welcome-area section-padding2">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 align-self-center">
-                <div class="welcome-img">
-                    <img src="~/assets/images/welcome-bg.png" class="img-fluid" alt="">
-                </div>
-            </div>
-            <div class="col-md-6 align-self-center">
-                <div class="welcome-text mt-5 mt-md-0">
-                    <h3><span class="style-change">welcome</span> <br>to food fun</h3>
-                    <p class="pt-3">Created god gathered don't you yielding herb you had. And isn't, god was saw. Dominion. Great sixth for in unto was. Open can't tree am waters brought. Divide after there. Was.</p>
-                    <p>Created god gathered don't you yielding herb you had. And isn't, god was saw. Dominion. Great sixth for in unto was. Open can't tree waters brought. Divide after there. Was. Created god gathered don't you yielding herb you had. And isn't god.</p>
-                    <a href="#" class="template-btn mt-3">book a table</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Welcome Area End -->
-<<!-- Food Area Starts -->
-<section class="food-area section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-5">
-                <div class="section-top">
-                    <h3><span class="style-change">we serve</span> <br>delicious food</h3>
-                    <p class="pt-3">They're fill divide i their yielding our after have him fish on there for greater man moveth, moved Won't together isn't for fly divide mids fish firmament on net.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-md-4 col-sm-6">
-                    <div class="single-food">
-                        <div class="food-img">
-                            <img src="@Url.Content(item.ImageUrl)" class="img-fluid" alt="">
-                        </div>
-                        <div class="food-content">
-                            <div class="d-flex justify-content-between">
-                                <h5>@item.Name</h5>
-                                <span class="style-change">tk @item.Price</span>
-                            </div>
-                            <p class="pt-3">@item.Description</p>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-</section>
-<!-- Food Area End -->
-<!-- Reservation Area Starts -->
-<div class="reservation-area section-padding text-center">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h2>Natural ingredients and testy food</h2>
-                <h4 class="mt-4">some trendy and popular courses offerd</h4>
-                <a href="" class="template-btn template-btn2 mt-4">reservation</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Reservation Area End -->
-<!-- Deshes Area Starts -->
-<div class="deshes-area section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-top2 text-center">
-                    <h3>Our <span>special</span> dishes</h3>
-                    <p><i>Beast kind form divide night above let moveth bearing darkness.</i></p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            @foreach (var item in Model.Take(2).Select((x, i) => new { Item = x, Index = i + 1 }))
-            {
-                <div class="col-lg-5 col-md-6 align-self-center">
-                    <h1>@item.Index.ToString()</h1>
-                    <div class="deshes-text">
-                        <h3><span>@item.Item.Name</span><br> @item.Item.Description</h3>
-                        <p class="pt-3">@item.Item.Description</p>
-                        <span class="style-change">Tk @item.Item.Price</span>
-                        <a href="#" class="template-btn3 mt-3">book a table <span><i class="fa fa-long-arrow-right"></i></span></a>
-                    </div>
-                </div>
-                <div class="col-lg-5 offset-lg-2 col-md-6 align-self-center mt-4 mt-md-0">
-                    <img src="@Url.Content(item.Item.ImageUrl)" alt="" class="img-fluid">
-                </div>
-            }
-        </div>
 
-    </div>
-</div>
-<!-- Deshes Area End -->
-<!-- Testimonial Area Starts -->
-<section class="testimonial-area section-padding4">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-top2 text-center">
-                    <h3>Customer <span>says</span></h3>
-                    <p><i>Beast kind form divide night above let moveth bearing darkness.</i></p>
+    <!-- Banner Area Starts -->
+    <section class="banner-area text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h6>the most interesting food in the world</h6>
+                    <h1>
+                        Discover the <span class="prime-color">flavors</span><br>
+                        <span class="style-change">of <span class="prime-color">food</span>fun</span>
+                    </h1>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="testimonial-slider owl-carousel">
-                    <div class="single-slide d-sm-flex">
-                        <div class="customer-img mr-4 mb-4 mb-sm-0">
-                            <img src="assets/images/customer1.png" alt="">
-                        </div>
-                        <div class="customer-text">
-                            <h5>adame nesane</h5>
-                            <span><i>Chief Customer</i></span>
-                            <p class="pt-3">You're had. Subdue grass Meat us winged years you'll doesn't. fruit two also won one yielding creepeth third give may never lie alternet food.</p>
-                        </div>
+    </section>
+    <!-- Banner Area End -->
+    <!-- Welcome Area Starts -->
+    <section class="welcome-area section-padding2">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 align-self-center">
+                    <div class="welcome-img">
+                        <img src="~/assets/images/welcome-bg.png" class="img-fluid" alt="">
                     </div>
-                    <div class="single-slide d-sm-flex">
-                        <div class="customer-img mr-4 mb-4 mb-sm-0">
-                            <img src="assets/images/customer2.png" alt="">
-                        </div>
-                        <div class="customer-text">
-                            <h5>adam nahan</h5>
-                            <span><i>Chief Customer</i></span>
-                            <p class="pt-3">You're had. Subdue grass Meat us winged years you'll doesn't. fruit two also won one yielding creepeth third give may never lie alternet food.</p>
-                        </div>
-                    </div>
-                    <div class="single-slide d-sm-flex">
-                        <div class="customer-img mr-4 mb-4 mb-sm-0">
-                            <img src="assets/images/customer1.png" alt="">
-                        </div>
-                        <div class="customer-text">
-                            <h5>adame nesane</h5>
-                            <span><i>Chief Customer</i></span>
-                            <p class="pt-3">You're had. Subdue grass Meat us winged years you'll doesn't. fruit two also won one yielding creepeth third give may never lie alternet food.</p>
-                        </div>
+                </div>
+                <div class="col-md-6 align-self-center">
+                    <div class="welcome-text mt-5 mt-md-0">
+                        <h3><span class="style-change">welcome</span> <br>to food fun</h3>
+                        <p class="pt-3">Created god gathered don't you yielding herb you had...</p>
+                        <a href="#" class="template-btn mt-3">book a table</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- Testimonial Area End -->
-<!-- Update Area Starts -->
-<!--
-<section class="update-area section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-top2 text-center">
-                    <h3>Our <span>food</span> update</h3>
-                    <p><i>Beast kind form divide night above let moveth bearing darkness.</i></p>
+    </section>
+    <!-- Welcome Area End -->
+    <!-- Food Area Starts -->
+    <section class="food-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="section-top">
+                        <h3><span class="style-change">we serve</span> <br>delicious food</h3>
+                        <p class="pt-3">They're fill divide i their yielding our after have him...</p>
+                    </div>
                 </div>
+            </div>
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 col-sm-6">
+                        <div class="single-food">
+                            <div class="food-img">
+                                <img src="@Url.Content(item.ImageUrl)" class="img-fluid" alt="">
+                            </div>
+                            <div class="food-content">
+                                <div class="d-flex justify-content-between">
+                                    <!-- Clickable food name -->
+                                    <h5>@Html.ActionLink(item.Name, "FoodDetails", "Home", new { name = item.Name }, new { @class = "food-item-link" })</h5>
+                                    <span class="style-change">tk @item.Price</span>
+                                </div>
+                                <p class="pt-3">@item.Description</p>
+
+                                <!-- Add to Cart Button -->
+                                <form id="add-to-cart-form-@item.Id" class="add-to-cart-form" data-item-id="@item.Id" data-item-name="@item.Name" data-item-price="@item.Price" method="post">
+                                    <input type="hidden" name="id" value="@item.Id" />
+                                    <button type="button" class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="single-food">
-                    <div class="food-img">
-                        <img src="assets/images/update1.jpg" class="img-fluid" alt="">
-                    </div>
-                    <div class="food-content">
-                        <div class="post-admin d-lg-flex mb-3">
-                            <span class="mr-5 d-block mb-2 mb-lg-0"><i class="fa fa-user-o mr-2"></i>Admin</span>
-                            <span><i class="fa fa-calendar-o mr-2"></i>18/09/2018</span>
-                        </div>
-                        <h5>no finer food can be found</h5>
-                        <p>nancy boy off his nut so I said chimney pot be James Bond aking cakes he.</p>
-                        <a href="#" class="template-btn3 mt-2">read more <span><i class="fa fa-long-arrow-right"></i></span></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="single-food my-5 my-md-0">
-                    <div class="food-img">
-                        <img src="~/assets/images/update2.jpg" class="img-fluid" alt="">
-                    </div>
-                    <div class="food-content">
-                        <div class="post-admin d-lg-flex mb-3">
-                            <span class="mr-5 d-block mb-2 mb-lg-0"><i class="fa fa-user-o mr-2"></i>Admin</span>
-                            <span><i class="fa fa-calendar-o mr-2"></i>20/09/2018</span>
-                        </div>
-                        <h5>things go better with food</h5>
-                        <p>nancy boy off his nut so I said chimney pot be James Bond aking cakes he.</p>
-                        <a href="#" class="template-btn3 mt-2">read more <span><i class="fa fa-long-arrow-right"></i></span></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="single-food">
-                    <div class="food-img">
-                        <img src="~/assets/images/update3.jpg" class="img-fluid" alt="">
-                    </div>
-                    <div class="food-content">
-                        <div class="post-admin d-lg-flex mb-3">
-                            <span class="mr-5 d-block mb-2 mb-lg-0"><i class="fa fa-user-o mr-2"></i>Admin</span>
-                            <span><i class="fa fa-calendar-o mr-2"></i>22/09/2018</span>
-                        </div>
-                        <h5>food head above the rest</h5>
-                        <p>nancy boy off his nut so I said chimney pot be James Bond aking cakes he.</p>
-                        <a href="#" class="template-btn3 mt-2">read more <span><i class="fa fa-long-arrow-right"></i></span></a>
-                    </div>
+    </section>
+    <!-- Food Area End -->
+    <!-- Reservation Area Starts -->
+    <div class="reservation-area section-padding text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Natural ingredients and tasty food</h2>
+                    <h4 class="mt-4">Some trendy and popular courses offered</h4>
+                    <a href="" class="template-btn template-btn2 mt-4">reservation</a>
                 </div>
             </div>
         </div>
     </div>
-</section>
- -->
-<!-- Update Area End -->
-<!-- Table Area Starts -->
-<!--
-<section class="table-area section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-top2 text-center">
-                    <h3>Book <span>your</span> table</h3>
-                    <p><i>Beast kind form divide night above let moveth bearing darkness.</i></p>
+    <!-- Reservation Area End -->
+    <!-- Special Dishes Area Starts -->
+    <div class="deshes-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-top2 text-center">
+                        <h3>Our <span>special</span> dishes</h3>
+                        <p><i>Beast kind form divide night above let moveth bearing darkness.</i></p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2">
-                <form action="#">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+            <div class="row">
+                @foreach (var item in Model.Take(2).Select((x, i) => new { Item = x, Index = i + 1 }))
+                {
+                    <div class="col-lg-5 col-md-6 align-self-center">
+                        <h1>@item.Index.ToString()</h1>
+                        <div class="deshes-text">
+                            <h3><span>@item.Item.Name</span><br> @item.Item.Description</h3>
+                            <p class="pt-3">@item.Item.Description</p>
+                            <span class="style-change">Tk @item.Item.Price</span>
+                            <a href="#" class="template-btn3 mt-3">book a table <span><i class="fa fa-long-arrow-right"></i></span></a>
                         </div>
-                        <input type="text" id="datepicker">
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
-                        </div>
-                        <input type="text" id="datepicker2">
+                    <div class="col-lg-5 offset-lg-2 col-md-6 align-self-center mt-4 mt-md-0">
+                        <img src="@Url.Content(item.Item.ImageUrl)" alt="" class="img-fluid">
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-user-o"></i></span>
-                        </div>
-                        <input type="text">
-                    </div>
-                    <div class="table-btn text-center">
-                        <a href="#" class="template-btn template-btn2 mt-4">book a table</a>
-                    </div>
-                </form>
+                }
             </div>
         </div>
     </div>
-</section>
-<!-- Table Area End -->
- -->
+    <!-- Special Dishes Area End -->
+    <!-- Testimonial Area Starts -->
+    <section class="testimonial-area section-padding4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-top2 text-center">
+                        <h3>Customer <span>says</span></h3>
+                        <p><i>Beast kind form divide night above let moveth bearing darkness.</i></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="testimonial-slider owl-carousel">
+                        <div class="single-slide d-sm-flex">
+                            <div class="customer-img mr-4 mb-4 mb-sm-0">
+                                <img src="~/assets/images/customer1.png" alt="">
+                            </div>
+                            <div class="customer-text">
+                                <h5>adame nesane</h5>
+                                <span><i>Chief Customer</i></span>
+                                <p class="pt-3">You're had. Subdue grass Meat us winged years you'll...</p>
+                            </div>
+                        </div>
+                        <!-- Additional testimonial slides can be added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonial Area End -->
+    <!-- Location Prompt Script -->
+    <script>
+        $(document).ready(function () {
+            var locationContainer = $('#location-container');
+            var locationDisplay = $('#location-display');
+            var changeLocationLink = $('#change-location');
+
+            function updateLocationDisplay(location) {
+                locationDisplay.text(location);
+                locationContainer.show();
+            }
+
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        function (position) {
+                            var latitude = position.coords.latitude;
+                            var longitude = position.coords.longitude;
+                            var location = 'Latitude: ' + latitude + ', Longitude: ' + longitude;
+                            sessionStorage.setItem('userLocation', location);
+                            updateLocationDisplay(location);
+                        },
+                        function (error) {
+                            handleLocationError(error);
+                        }
+                    );
+                } else {
+                    alert('Geolocation is not supported by this browser.');
+                }
+            }
+
+            function handleLocationError(error) {
+                switch (error.code) {
+                    case error.PERMISSION_DENIED:
+                        alert('Location access denied by the user.');
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        alert('Location information is unavailable.');
+                        break;
+                    case error.TIMEOUT:
+                        alert('The request to get user location timed out.');
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        alert('An unknown error occurred.');
+                        break;
+                }
+            }
+
+            // Check if location is already stored in session storage
+            var storedLocation = sessionStorage.getItem('userLocation');
+            if (storedLocation) {
+                updateLocationDisplay(storedLocation);
+            } else {
+                getLocation();
+            }
+
+            // Event handler for changing location
+            changeLocationLink.on('click', function (e) {
+                e.preventDefault();
+                getLocation();
+            });
+        });
+    </script>
+
+
+    <!-- Add to Cart Script -->
+    <script>
+        $(document).ready(function () {
+            $('.add-to-cart-btn').on('click', function () {
+                var form = $(this).closest('form');
+                var itemId = form.data('item-id');
+                var itemName = form.data('item-name');
+                var itemPrice = form.data('item-price');
+
+                $.ajax({
+                    url: '@Url.Action("AddToCart", "Cart")',
+                    type: 'POST',
+                    data: {
+                        FoodItemId: itemId,
+                        Name: itemName,
+                        Price: itemPrice,
+                        Quantity: 1
+                    },
+                    success: function (response) {
+                        alert('Item added to cart!');
+                    },
+                    error: function () {
+                        alert('Error adding item to cart.');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

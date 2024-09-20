@@ -1,0 +1,201 @@
+﻿@model WebApplication1.Models.FoodItem
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Responsive Bootstrap4 Shop Template">
+
+    <!-- title -->
+    <title>@Model.Name - Details</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/png" href="~/assets01/img/favicon.png">
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="~/assets01/css/all.min.css">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="~/assets01/bootstrap/css/bootstrap.min.css">
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="~/assets01/css/owl.carousel.css">
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="~/assets01/css/magnific-popup.css">
+    <!-- animate css -->
+    <link rel="stylesheet" href="~/assets01/css/animate.css">
+    <!-- mean menu css -->
+    <link rel="stylesheet" href="~/assets01/css/meanmenu.min.css">
+    <!-- main style -->
+    <link rel="stylesheet" href="~/assets01/css/main.css">
+    <!-- responsive -->
+    <link rel="stylesheet" href="~/assets01/css/responsive.css">
+</head>
+<body>
+
+    <!--PreLoader-->
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="circle"></div>
+        </div>
+    </div>
+    <!--PreLoader Ends-->
+    <!-- header -->
+    @* Your existing header section *@
+
+    <!-- Food Details Section -->
+    <section class="h-100 h-custom" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body p-4">
+
+                            <div class="row">
+                                <!-- Left Column -->
+                                <div class="col-lg-7">
+                                    <h5 class="mb-3">
+                                        <a href="@Url.Action("Index", "Home")" class="text-body">
+                                            <i class="fas fa-long-arrow-alt-left me-2"></i> Continue ordering
+                                        </a>
+                                    </h5>
+
+                                    <hr>
+
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                        <div>
+                                           
+                                            <p class="mb-0">You have <span id="item-count">1</span> item in your cart</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="d-flex flex-row align-items-center">
+                                                    <div>
+                                                        <img src="@Url.Content(Model.ImageUrl)"
+                                                             class="img-fluid rounded-3"
+                                                             alt="@Model.Name"
+                                                             style="width: 65px;">
+                                                    </div>
+                                                    <div class="ms-3">
+                                                        <h5>@Model.Name</h5>
+                                                        <p class="small mb-0">@Model.Description</p>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-row align-items-center">
+                                                    <div style="width: 80px;">
+                                                        <h5 class="mb-0">tk @Model.Price</h5>
+                                                    </div>
+                                                    <a href="#!" id="delete-button" data-id="@Model.Id" style="color: #cecece;">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- Right Column -->
+                                <div class="col-lg-5">
+
+                                    <div class="card bg-primary text-white rounded-3">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                                <h5 class="mb-0">Cart Summary</h5>
+                                            </div>
+
+                                            <form action="@Url.Action("Add", "Cart")" method="post">
+                                                <input type="hidden" name="id" value="@Model.Id" />
+                                                <input type="hidden" name="price" id="hidden-price" value="@Model.Price" />
+                                                <input type="hidden" name="quantity" id="hidden-quantity" value="1" />
+                                                <div class="form-group mb-4">
+                                                    <label for="quantity" class="text-white">Quantity</label>
+                                                    <input type="number" name="quantity" id="quantity-form" value="1" min="1" class="form-control form-control-lg" />
+                                                </div>
+
+                                                <button type="submit" class="btn btn-info btn-block btn-lg">
+                                                    Add to Cart
+                                                </button>
+                                            </form>
+
+                                            <hr class="my-4">
+
+                                            <div class="d-flex justify-content-between">
+                                                <p class="mb-2">Subtotal</p>
+                                                <p class="mb-2">tk <span id="subtotal">@Model.Price</span></p>
+                                            </div>
+
+                                            <!-- You can add more summary details here if needed -->
+
+                                            <button type="button" class="btn btn-info btn-block btn-lg">
+                                                <div class="d-flex justify-content-between">
+                                                    <span>Total</span>
+                                                    <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                                                </div>
+                                            </button>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Food Details Section -->
+    <!-- footer -->
+    @* Your footer content here *@
+
+    <!-- javascript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/assets01/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/assets01/js/main.js"></script>
+
+    <script>
+$(document).ready(function () {
+    function updateSubtotal() {
+        var price = parseFloat($('#hidden-price').val());
+        var quantity = parseInt($('#quantity-form').val());
+        var subtotal = price * quantity;
+        $('#subtotal').text(subtotal.toFixed(2));
+        $('#item-count').text(quantity);
+    }
+
+    $('#quantity-form').on('input', function () {
+        updateSubtotal();
+    });
+
+    // Initialize the subtotal and item count
+    updateSubtotal();
+
+    $('#delete-button').on('click', function (e) {
+        e.preventDefault();
+        var itemId = $(this).data('id');
+
+        if (confirm('Are you sure you want to delete this item?')) {
+            $.ajax({
+                url: '@Url.Action("Remove", "Cart")',
+                type: 'POST',
+                data: { id: itemId },
+                success: function () {
+                    window.location.href = '@Url.Action("Index", "Home")'; // Redirect to menu page
+                },
+                error: function () {
+                    alert('Error deleting item. Please try again.');
+                }
+            });
+        }
+    });
+});
+    </script>
+</body>
+</html>

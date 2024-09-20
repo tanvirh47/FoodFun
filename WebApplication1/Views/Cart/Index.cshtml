@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WebApplication1.Models.CartItem>
+
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<section class="cart-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Your Cart</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Price</td>
+                                <td>@item.Quantity</td>
+                                <td>@(item.Price * item.Quantity)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <a href="@Url.Action("Checkout")" class="btn btn-primary">Proceed to Checkout</a>
+            </div>
+        </div>
+    </div>
+</section>

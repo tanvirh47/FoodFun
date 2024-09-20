@@ -129,13 +129,22 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\FoodItemsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\userdatasController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Data\WebApplication1Context.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs">
+      <DependentUpon>FoodFunModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CartItem.cs">
+      <DependentUpon>FoodFunModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CheckoutModel.cs" />
     <Compile Include="Models\FoodFunModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -154,27 +163,80 @@
     <Compile Include="Models\FoodItem.cs">
       <DependentUpon>FoodFunModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\User.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>User.Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\User.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>User.tt</DependentUpon>
+      <DependentUpon>FoodFunModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\User.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>User.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\userdata.cs">
-      <DependentUpon>User.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\UserLoginViewModel.cs" />
+    <Compile Include="Models\UserRegistrationViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets01\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="assets01\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="assets01\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="assets01\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="assets01\bootstrap\css\bootstrap.css" />
+    <Content Include="assets01\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets01\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="assets01\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="assets01\bootstrap\js\bootstrap.js" />
+    <Content Include="assets01\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assets01\css\all.min.css" />
+    <Content Include="assets01\css\animate.css" />
+    <Content Include="assets01\css\magnific-popup.css" />
+    <Content Include="assets01\css\main.css" />
+    <Content Include="assets01\css\meanmenu.min.css" />
+    <Content Include="assets01\css\owl.carousel.css" />
+    <Content Include="assets01\css\responsive.css" />
+    <Content Include="assets01\css\scss\pages\_404.css" />
+    <Content Include="assets01\img\1.jpg" />
+    <Content Include="assets01\img\a.jpg" />
+    <Content Include="assets01\img\abt.jpg" />
+    <Content Include="assets01\img\avaters\avatar1.png" />
+    <Content Include="assets01\img\avaters\avatar2.png" />
+    <Content Include="assets01\img\avaters\avatar3.png" />
+    <Content Include="assets01\img\breadcrumb-bg.jpg" />
+    <Content Include="assets01\img\company-logos\1.png" />
+    <Content Include="assets01\img\company-logos\2.png" />
+    <Content Include="assets01\img\company-logos\3.png" />
+    <Content Include="assets01\img\company-logos\4.png" />
+    <Content Include="assets01\img\company-logos\5.png" />
+    <Content Include="assets01\img\dd.jpg" />
+    <Content Include="assets01\img\favicon.png" />
+    <Content Include="assets01\img\feature-bg.jpg" />
+    <Content Include="assets01\img\hero-bg-2.jpg" />
+    <Content Include="assets01\img\hero-bg-3.jpg" />
+    <Content Include="assets01\img\hero-bg.jpg" />
+    <Content Include="assets01\img\homepage-bg-pattern.png" />
+    <Content Include="assets01\img\latest-news\news-bg-1.jpg" />
+    <Content Include="assets01\img\latest-news\news-bg-2.jpg" />
+    <Content Include="assets01\img\latest-news\news-bg-3.jpg" />
+    <Content Include="assets01\img\latest-news\news-bg-4.jpg" />
+    <Content Include="assets01\img\latest-news\news-bg-5.jpg" />
+    <Content Include="assets01\img\latest-news\news-bg-6.jpg" />
+    <Content Include="assets01\img\logo.png" />
+    <Content Include="assets01\img\products\product-img-1.jpg" />
+    <Content Include="assets01\img\products\product-img-2.jpg" />
+    <Content Include="assets01\img\products\product-img-3.jpg" />
+    <Content Include="assets01\img\products\product-img-4.jpg" />
+    <Content Include="assets01\img\products\product-img-5.jpg" />
+    <Content Include="assets01\img\products\product-img-6.jpg" />
+    <Content Include="assets01\img\team\team-1.jpg" />
+    <Content Include="assets01\img\team\team-2.jpg" />
+    <Content Include="assets01\img\team\team-3.jpg" />
+    <Content Include="assets01\js\form-validate.js" />
+    <Content Include="assets01\js\jquery-1.11.3.min.js" />
+    <Content Include="assets01\js\jquery.countdown.js" />
+    <Content Include="assets01\js\jquery.isotope-3.0.6.min.js" />
+    <Content Include="assets01\js\jquery.magnific-popup.min.js" />
+    <Content Include="assets01\js\jquery.meanmenu.min.js" />
+    <Content Include="assets01\js\main.js" />
+    <Content Include="assets01\js\owl.carousel.min.js" />
+    <Content Include="assets01\js\sticker.js" />
+    <Content Include="assets01\js\waypoints.js" />
+    <Content Include="assets01\webfonts\fa-brands-400.svg" />
+    <Content Include="assets01\webfonts\fa-regular-400.svg" />
+    <Content Include="assets01\webfonts\fa-solid-900.svg" />
     <Content Include="assets\css\animate-3.7.0.css" />
     <Content Include="assets\css\bootstrap-4.1.3.min.css" />
     <Content Include="assets\css\font-awesome-4.7.0.min.css" />
@@ -301,16 +363,6 @@
       <DependentUpon>FoodFunModel.edmx</DependentUpon>
       <LastGenOutput>FoodFunModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\User.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>User.edmx</DependentUpon>
-      <LastGenOutput>User.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\User.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>User.edmx</DependentUpon>
-      <LastGenOutput>User.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -357,13 +409,6 @@
     <Content Include="assets\sass\setting\_mixin.scss" />
     <Content Include="assets\sass\setting\_variable.scss" />
     <Content Include="assets\sass\style.scss" />
-    <EntityDeploy Include="Models\User.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>User.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\User.edmx.diagram">
-      <DependentUpon>User.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\FoodFunModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>FoodFunModel.Designer.cs</LastGenOutput>
@@ -371,6 +416,51 @@
     <Content Include="Models\FoodFunModel.edmx.diagram">
       <DependentUpon>FoodFunModel.edmx</DependentUpon>
     </Content>
+    <Content Include="assets01\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="assets01\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="assets01\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="assets01\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="assets01\bootstrap\css\bootstrap.css.map" />
+    <Content Include="assets01\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="assets01\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="assets01\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="assets01\bootstrap\js\bootstrap.js.map" />
+    <Content Include="assets01\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="assets01\css\scss\base\_mixins.scss" />
+    <Content Include="assets01\css\scss\base\_typography.scss" />
+    <Content Include="assets01\css\scss\base\_variables.scss" />
+    <Content Include="assets01\css\scss\common\_common.scss" />
+    <Content Include="assets01\css\scss\common\_footer.scss" />
+    <Content Include="assets01\css\scss\common\_header.scss" />
+    <Content Include="assets01\css\scss\common\_hover.scss" />
+    <Content Include="assets01\css\scss\main.scss" />
+    <Content Include="assets01\css\scss\pages\_404.scss" />
+    <Content Include="assets01\css\scss\pages\_about.scss" />
+    <Content Include="assets01\css\scss\pages\_contact.scss" />
+    <Content Include="assets01\css\scss\pages\_shop.scss" />
+    <Content Include="assets01\css\scss\prepros-6.config" />
+    <Content Include="assets01\css\scss\sections\_about.scss" />
+    <Content Include="assets01\css\scss\sections\_cart-banner.scss" />
+    <Content Include="assets01\css\scss\sections\_hero.scss" />
+    <Content Include="assets01\css\scss\sections\_list.scss" />
+    <Content Include="assets01\css\scss\sections\_news.scss" />
+    <Content Include="assets01\css\scss\sections\_shop-banner.scss" />
+    <Content Include="assets01\css\scss\sections\_testimonials.scss" />
+    <Content Include="assets01\webfonts\fa-brands-400.eot" />
+    <Content Include="assets01\webfonts\fa-brands-400.eot_" />
+    <Content Include="assets01\webfonts\fa-brands-400.ttf" />
+    <Content Include="assets01\webfonts\fa-brands-400.woff" />
+    <Content Include="assets01\webfonts\fa-brands-400.woff2" />
+    <Content Include="assets01\webfonts\fa-regular-400.eot" />
+    <Content Include="assets01\webfonts\fa-regular-400.eot_" />
+    <Content Include="assets01\webfonts\fa-regular-400.ttf" />
+    <Content Include="assets01\webfonts\fa-regular-400.woff" />
+    <Content Include="assets01\webfonts\fa-regular-400.woff2" />
+    <Content Include="assets01\webfonts\fa-solid-900.eot" />
+    <Content Include="assets01\webfonts\fa-solid-900.eot_" />
+    <Content Include="assets01\webfonts\fa-solid-900.ttf" />
+    <Content Include="assets01\webfonts\fa-solid-900.woff" />
+    <Content Include="assets01\webfonts\fa-solid-900.woff2" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -399,17 +489,17 @@
     <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\_LayoutPage1.cshtml" />
     <Content Include="Views\Home\Element.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\userdatas\Create.cshtml" />
-    <Content Include="Views\userdatas\Delete.cshtml" />
-    <Content Include="Views\userdatas\Details.cshtml" />
-    <Content Include="Views\userdatas\Edit.cshtml" />
-    <Content Include="Views\userdatas\Index.cshtml" />
     <Content Include="Views\FoodItems\Create.cshtml" />
     <Content Include="Views\FoodItems\Delete.cshtml" />
     <Content Include="Views\FoodItems\Details.cshtml" />
     <Content Include="Views\FoodItems\Edit.cshtml" />
     <Content Include="Views\FoodItems\Index.cshtml" />
+    <Content Include="Views\Home\FoodDetails.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Checkout\Checkout.cshtml" />
+    <Content Include="Views\Checkout\OrderConfirmation.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

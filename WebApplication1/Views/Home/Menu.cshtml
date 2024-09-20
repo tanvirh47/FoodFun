@@ -36,8 +36,6 @@
                         <li class="active">
                             <a href="~/FoodItems/Index" class="nav-link">Item</a>
                         </li>
-
-
                         <li class="active">
                             @Html.ActionLink("Login", "Login", "Home", new { @class = "nav-link" })
                         </li>
@@ -79,7 +77,7 @@
                         </div>
                         <div class="food-content">
                             <div class="d-flex justify-content-between">
-                                <h5>@item.Name</h5>
+                                <h5>@Html.ActionLink(item.Name, "FoodDetails", "Home", new { name = item.Name }, new { @class = "food-item-link" })</h5>
                                 <span class="style-change">tk @item.Price</span>
                             </div>
                             <p class="pt-3">@item.Description</p>
