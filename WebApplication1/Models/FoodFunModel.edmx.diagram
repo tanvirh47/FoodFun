@@ -11,6 +11,11 @@
         <EntityTypeShape EntityType="FoodFunDBModel.User" Width="1.5" PointX="3.375" PointY="4.875" />
         <AssociationConnector Association="FoodFunDBModel.FK__CartItems__CartI__5FB337D6" />
         <AssociationConnector Association="FoodFunDBModel.FK__CartItems__FoodI__60A75C0F" />
+        <EntityTypeShape EntityType="FoodFunDBModel.OrderItem" Width="1.5" PointX="7.875" PointY="2.625" />
+        <EntityTypeShape EntityType="FoodFunDBModel.Order" Width="1.5" PointX="5.625" PointY="4.875" />
+        <AssociationConnector Association="FoodFunDBModel.FK__OrderItem__FoodI__19DFD96B" />
+        <AssociationConnector Association="FoodFunDBModel.FK__OrderItem__Order__18EBB532" />
+        <AssociationConnector Association="FoodFunDBModel.FK__Orders__UserId__160F4887" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

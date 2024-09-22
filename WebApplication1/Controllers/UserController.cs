@@ -4,7 +4,9 @@ using WebApplication1.Models;
 using WebApplication1.ViewModels;
 using System.Security.Cryptography;
 using System.Text;
-using WebApplication1.Data; // Ensure this is included
+using WebApplication1.Data; // Ensure this is included 
+using System.Data.Entity;
+
 
 namespace WebApplication1.Controllers
 {
@@ -66,10 +68,11 @@ namespace WebApplication1.Controllers
                 var user = db.Users.SingleOrDefault(u => u.Username == model.UsernameOrEmail || u.Email == model.UsernameOrEmail);
                 if (user != null && VerifyPassword(model.Password, user.PasswordHash))
                 {
-                    // Store username in the session
+                    Session["UserId"] = user.Id; // Store UserId
                     Session["Username"] = user.Username; // Store Username
                     return RedirectToAction("Index", "Home");
                 }
+
                 ModelState.AddModelError("", "Invalid login attempt.");
             }
             return View(model);
@@ -79,9 +82,11 @@ namespace WebApplication1.Controllers
         // Logout
         public ActionResult Logout()
         {
-            Session.Clear();
-            return RedirectToAction("Login");
+            Session.Clear(); // Clear all session data
+            TempData["Message"] = "You have successfully logged out."; // Use TempData to display message
+            return RedirectToAction("Index", "Home"); // Redirect to Home page
         }
+
 
         // Helper methods
         private string HashPassword(string password)
@@ -98,5 +103,24 @@ namespace WebApplication1.Controllers
             var hashInput = HashPassword(inputPassword);
             return storedHash == hashInput;
         }
+        public ActionResult Dashboard()
+        {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+            var userId = (int)Session["UserId"];
+
+            // Fetch orders along with the associated OrderItems and FoodItems
+            var orders = db.Orders
+                .Where(o => o.UserId == userId)
+                .Include(o => o.OrderItems.Select(oi => oi.FoodItem))  // Include OrderItems and their related FoodItems
+                .ToList();
+
+            return View(orders);
+        }
+
+
     }
 }

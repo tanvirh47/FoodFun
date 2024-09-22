@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication1.Models.FoodItem>
+﻿ @model IEnumerable<WebApplication1.Models.FoodItem>
 @{
     ViewBag.Title = "Home";
     Layout = "~/Views/_LayoutPage1.cshtml";
@@ -239,31 +239,47 @@
 
     <!-- Add to Cart Script -->
     <script>
-        $(document).ready(function () {
-            $('.add-to-cart-btn').on('click', function () {
-                var form = $(this).closest('form');
-                var itemId = form.data('item-id');
-                var itemName = form.data('item-name');
-                var itemPrice = form.data('item-price');
+    $(document).ready(function () {
+    $('.add-to-cart-btn').on('click', function () {
+        var form = $(this).closest('form');
+        var itemId = form.find('input[name="id"]').val();
+        var quantity = 1;
 
-                $.ajax({
-                    url: '@Url.Action("AddToCart", "Cart")',
-                    type: 'POST',
-                    data: {
-                        FoodItemId: itemId,
-                        Name: itemName,
-                        Price: itemPrice,
-                        Quantity: 1
-                    },
-                    success: function (response) {
-                        alert('Item added to cart!');
-                    },
-                    error: function () {
-                        alert('Error adding item to cart.');
-                    }
-                });
-            });
+        $.ajax({
+            url: '@Url.Action("Add", "Cart")',
+            type: 'POST',
+            data: {
+                id: itemId,
+                quantity: quantity
+            },
+            success: function (response) {
+                alert('Item added to cart!');
+
+                // Update cart count
+                updateCartCount();
+            },
+            error: function () {
+                alert('Error adding item to cart.');
+            }
         });
+    });
+
+    function updateCartCount() {
+        $.ajax({
+            url: '@Url.Action("GetCartCount", "Cart")', // Ensure this action exists
+            type: 'GET',
+            success: function (count) {
+                $('#cart-count').text(count); // Update the cart count displayed
+            },
+            error: function () {
+                console.error('Error retrieving cart count.');
+            }
+        });
+    }
+});
+
+
+
     </script>
 
 </body>

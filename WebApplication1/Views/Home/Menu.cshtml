@@ -2,129 +2,153 @@
 
 @{
     ViewBag.Title = "Menu";
-    Layout = "~/Views/_LayoutPage1.cshtml";
+    Layout = "~/Views/_LayoutPage1.cshtml"; // Use the layout file
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-<header class="header-area header-area2">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-2">
-                <div class="logo-area">
-                    <a href="index.html"><img src="~/assets/images/logo/logo2.png" alt="logo"></a>
-                </div>
-            </div>
-            <div class="col-lg-10">
-                <div class="custom-navbar">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <div class="main-menu main-menu2">
-                    <ul>
-                        <li class="active">
-                            @Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })
-                        </li>
-                        <li class="active">
-                            @Html.ActionLink("About", "About", "Home", new { @class = "nav-link" })
-                        </li>
-                        <li class="active">
-                            @Html.ActionLink("Menu", "Menu", "Home", new { @class = "nav-link" })
-                        </li>
-                        <li class="active">
-                            @Html.ActionLink("Contact", "Contact", "Home", new { @class = "nav-link" })
-                        </li>
-                        <li class="active">
-                            <a href="~/FoodItems/Index" class="nav-link">Item</a>
-                        </li>
-                        <li class="active">
-                            @Html.ActionLink("Login", "Login", "Home", new { @class = "nav-link" })
-                        </li>
-                    </ul>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <!-- Banner Area Starts -->
+    <section class="banner-area banner-area2 menu-bg text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1><i>Our Menu</i></h1>
+                    <p class="pt-2"><i>Becxast kind form divide night above let moveth bearing darkness.</i></p>
                 </div>
             </div>
         </div>
-    </div>
-</header>
-
-<section class="banner-area banner-area2 menu-bg text-center">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1><i>Our Menu</i></h1>
-                <p class="pt-2"><i>Becxast kind form divide night above let moveth bearing darkness.</i></p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="food-area section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-5">
-                <div class="section-top">
-                    <h3><span class="style-change">we serve</span> <br>delicious food</h3>
-                    <p class="pt-3">They're fill divide i their yielding our after have him fish on there for greater man moveth, moved Won't together isn't for fly divide mids fish firmament on net.</p>
+    </section>
+    <!-- Banner Area End -->
+    <!-- Food Area Starts -->
+    <section class="food-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="section-top">
+                        <h3><span class="style-change">we serve</span> <br>delicious food</h3>
+                        <p class="pt-3">They're fill divide i their yielding our after have him fish on there for greater man moveth, moved Won't together isn't for fly divide mids fish firmament on net.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-md-4 col-sm-6">
-                    <div class="single-food">
-                        <div class="food-img">
-                            <img src="@Url.Content(item.ImageUrl)" class="img-fluid" alt="">
-                        </div>
-                        <div class="food-content">
-                            <div class="d-flex justify-content-between">
-                                <h5>@Html.ActionLink(item.Name, "FoodDetails", "Home", new { name = item.Name }, new { @class = "food-item-link" })</h5>
-                                <span class="style-change">tk @item.Price</span>
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 col-sm-6">
+                        <div class="single-food">
+                            <div class="food-img">
+                                <img src="@Url.Content(item.ImageUrl)" class="img-fluid" alt="">
                             </div>
-                            <p class="pt-3">@item.Description</p>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-</section>
+                            <div class="food-content">
+                                <div class="d-flex justify-content-between">
+                                    <h5>@Html.ActionLink(item.Name, "FoodDetails", "Home", new { name = item.Name }, new { @class = "food-item-link" })</h5>
+                                    <span class="style-change">tk @item.Price</span>
+                                </div>
+                                <p class="pt-3">@item.Description</p>
 
-<section class="table-area section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-top2 text-center">
-                    <h3>Book <span>your</span> table</h3>
-                    <p><i>Beast kind form divide night above let moveth bearing darkness.</i></p>
+                                <!-- Add to Cart Button -->
+                                <form id="add-to-cart-form-@item.Id" class="add-to-cart-form" data-item-id="@item.Id" data-item-name="@item.Name" data-item-price="@item.Price" method="post">
+                                    <input type="hidden" name="id" value="@item.Id" />
+                                    <button type="button" class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!-- Food Area End -->
+    <!-- Table Area Starts -->
+    <section class="table-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-top2 text-center">
+                        <h3>Book <span>your</span> table</h3>
+                        <p><i>Beast kind form divide night above let moveth bearing darkness.</i></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <form action="#">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                            <input type="text" id="datepicker" class="form-control" placeholder="Select Date">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
+                            </div>
+                            <input type="text" id="datepicker2" class="form-control" placeholder="Select Time">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user-o"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Number of Guests">
+                        </div>
+                        <div class="table-btn text-center">
+                            <a href="#" class="template-btn template-btn2 mt-4">book a table</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2">
-                <form action="#">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                        </div>
-                        <input type="text" id="datepicker">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
-                        </div>
-                        <input type="text" id="datepicker2">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-user-o"></i></span>
-                        </div>
-                        <input type="text">
-                    </div>
-                    <div class="table-btn text-center">
-                        <a href="#" class="template-btn template-btn2 mt-4">book a table</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
+    <!-- Table Area End -->
+    <!-- Add to Cart Script -->
+    <script>
+    $(document).ready(function () {
+
+    $('.add-to-cart-btn').on('click', function () {
+        var form = $(this).closest('form');
+        var itemId = form.find('input[name="id"]').val();
+        var quantity = 1;
+
+        $.ajax({
+            url: '@Url.Action("Add", "Cart")',
+            type: 'POST',
+            data: {
+                id: itemId,
+                quantity: quantity
+            },
+            success: function (response) {
+                alert('Item added to cart!');
+
+                // Update cart count
+                updateCartCount();
+            },
+            error: function () {
+                alert('Error adding item to cart.');
+            }
+        });
+    });
+
+    function updateCartCount() {
+        $.ajax({
+            url: '@Url.Action("GetCartCount", "Cart")', // Ensure this action exists
+            type: 'GET',
+            success: function (count) {
+                $('#cart-count').text(count); // Update the cart count displayed
+            },
+            error: function () {
+                console.error('Error retrieving cart count.');
+            }
+        });
+    }
+});
+
+
+
+    </script>
+</body>    
+</html>

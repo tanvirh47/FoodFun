@@ -1,55 +1,8 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Contact";
-    Layout = "~/Views/_LayoutPage1.cshtml";
+    Layout = "~/Views/_LayoutPage1.cshtml"; // Use the layout file
 }
 
-
-
-
-<!-- Header Area Starts -->
-<header class="header-area header-area2">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-2">
-                <div class="logo-area">
-                    <a href="index.html"><img src="~/assets/images/logo/logo2.png" alt="logo"></a>
-                </div>
-            </div>
-            <div class="col-lg-10">
-                <div class="custom-navbar">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <div class="main-menu main-menu2">
-                    <ul>
-                        <li class="active">
-                            @Html.ActionLink("Home", "Index", "Home", new { @class = " nav-link" })
-                        </li>
-                        <li class="active">
-                            @Html.ActionLink("About", "About", "Home", new { @class = " nav-link" })
-                        </li>
-                        <li class="active">
-                            @Html.ActionLink("Menu", "Menu", "Home", new { @class = " nav-link" })
-                        </li>
-                        <li class="active">
-                            @Html.ActionLink("Contact", "Contact", "Home", new { @class = " nav-link" })
-                        </li>
-                        <li class="active">
-                            <a href="~/FoodItems/Index" class="nav-link">Item</a>
-                        </li>
-
-                        <li class="active">
-                            @Html.ActionLink("Login", "Login", "Home", new { @class = " nav-link" })
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-<!-- Header Area End -->
 <!-- Banner Area Starts -->
 <section class="banner-area banner-area2 contact-bg text-center">
     <div class="container">
@@ -89,7 +42,7 @@
                     <div class="into-icon">
                         <i class="fa fa-home"></i>
                     </div>
-                    <div class="info-text">   
+                    <div class="info-text">
                         <h5>Dhaka, Bangladesh</h5>
                         <p>141, &142 Love Rd, Dhaka 1208</p>
                     </div>

@@ -27,54 +27,52 @@
             <div class="row">
                 <div class="col-lg-2">
                     <div class="logo-area">
-                        <a href="~/Home/Index"><img src="~/assets/images/logo/logo2.png" alt="logo"></a>
+                        <a href="@Url.Action("Index", "Home")">
+                            <img src="~/assets/images/logo/logo2.png" alt="logo">
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-10">
                     <div class="custom-navbar">
                         <span></span>
                         <span></span>
-                        <span></span>   
+                        <span></span>
                     </div>
                     <div class="main-menu main-menu2">
-                        <ul>
+                        <ul class="nav-items">
                             <li class="active">
-                                @Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })
+                                <a href="~/Home/Index" class="nav-link">Home</a>
                             </li>
                             <li class="active">
-                                @Html.ActionLink("About", "About", "Home", new { @class = "nav-link" })
+                                <a href="~/Home/About" class="nav-link">About</a>
                             </li>
                             <li class="active">
-                                @Html.ActionLink("Menu", "Menu", "Home", new { @class = "nav-link" })
+                                <a href="~/Home/Menu" class="nav-link">Menu</a>
                             </li>
                             <li class="active">
-                                @Html.ActionLink("Contact", "Contact", "Home", new { @class = "nav-link" })
+                                <a href="~/Home/Contact" class="nav-link">Contact</a>
                             </li>
                             <li class="active">
                                 <a href="~/FoodItems/Index" class="nav-link">Item</a>
                             </li>
 
-                            @{
-                                var username = Session["Username"] as string;
-                            }
-
-                            <li class="nav-item dropdown">
-                                @if (username != null) // Show dropdown if user is logged in
-                                {
+                            @if (Session["Username"] != null)
+                            {
+                                <li class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-user" style="color:white;"></i> @username
+                                        <i class="fa fa-user" style="color:white;"></i> @Session["Username"]
                                     </a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="~/User/Dashboard" style="color: black !important;">Dashboard</a>
                                         <a class="dropdown-item" href="~/User/Logout" style="color: black !important;">Logout</a>
                                     </div>
-                                }
-                                else
-                                {
-                                    <a href="~/User/Login" class="nav-link">Login</a>
-                                }
-                            </li>
+                                </li>
+                            }
+                            else
+                            {
+                                <a href="~/User/Login" class="nav-link">Login</a>
 
+                            }
 
                             <!-- Cart Icon -->
                             <li class="nav-item">
@@ -83,8 +81,6 @@
                                     <span id="cart-count" class="badge badge-light position-absolute" style="top: -5px; right: -10px;">0</span>
                                 </a>
                             </li>
-
-
                         </ul>
                     </div>
                 </div>

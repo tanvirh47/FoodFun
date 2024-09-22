@@ -163,6 +163,12 @@
     <Compile Include="Models\FoodItem.cs">
       <DependentUpon>FoodFunModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>FoodFunModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderItem.cs">
+      <DependentUpon>FoodFunModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>FoodFunModel.tt</DependentUpon>
     </Compile>
@@ -500,6 +506,12 @@
     <Content Include="Views\Checkout\OrderConfirmation.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Order\OrderDetails.cshtml" />
+    <Content Include="Views\Order\OrderHistory.cshtml" />
+    <Content Include="Views\Cart\OrderConfirmation.cshtml" />
+    <Content Include="Views\User\Dashboard.cshtml" />
+    <Content Include="Views\_LayoutPage2.cshtml" />
+    <Content Include="Views\_LayoutPage3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,34 +1,69 @@
 ﻿@model WebApplication1.ViewModels.UserRegistrationViewModel
 
-<h2>Register</h2>
+<!-- Section: Design Block -->
+<section class="background-radial-gradient overflow-hidden">
+    <style>
+        .background-radial-gradient {
+            background-color: hsl(218, 41%, 15%);
+            background-image: radial-gradient(650px circle at 0% 0%, hsl(218, 41%, 35%) 15%, hsl(218, 41%, 30%) 35%, hsl(218, 41%, 20%) 75%, hsl(218, 41%, 19%) 80%, transparent 100%), radial-gradient(1250px circle at 100% 100%, hsl(218, 41%, 45%) 15%, hsl(218, 41%, 30%) 35%, hsl(218, 41%, 20%) 75%, hsl(218, 41%, 19%) 80%, transparent 100%);
+        }
 
-@using (Html.BeginForm("Register", "User", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
+        .bg-glass {
+            background-color: hsla(0, 0%, 100%, 0.9) !important;
+            backdrop-filter: saturate(200%) blur(25px);
+        }
+    </style>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Username)
-        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Username)
+    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+        <div class="row gx-lg-5 align-items-center mb-5">
+            <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+                <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+                    Welcome to FoodFun <br />
+                    <span style="color: hsl(218, 81%, 75%)">Register now to get started</span>
+                </h1>
+            </div>
+
+            <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+                <div class="card bg-glass">
+                    <div class="card-body px-4 py-5 px-md-5">
+                        @using (Html.BeginForm("Register", "User", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-group mb-4">
+                                @Html.LabelFor(m => m.Username, new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "Username" })
+                                @Html.ValidationMessageFor(m => m.Username)
+                            </div>
+
+                            <div class="form-group mb-4">
+                                @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                                @Html.ValidationMessageFor(m => m.Email)
+                            </div>
+
+                            <div class="form-group mb-4">
+                                @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </div>
+
+                            <div class="form-group mb-4">
+                                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "form-label" })
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block mb-4">Register</button>
+                        }
+
+                        <div class="text-center">
+                            <p>Already have an account? <a href="@Url.Action("Login", "User")">Log in here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email)
-        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Email)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password)
-        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Password)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword)
-        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.ConfirmPassword)
-    </div>
-
-    <button type="submit" class="btn btn-primary">Register</button>
-}
+</section>
+<!-- Section: Design Block -->

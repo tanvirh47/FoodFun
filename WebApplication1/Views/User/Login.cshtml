@@ -1,27 +1,67 @@
 ﻿@model WebApplication1.ViewModels.UserLoginViewModel
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<!-- Section: Design Block -->
+<section class="background-radial-gradient overflow-hidden">
+    <style>
+        .background-radial-gradient {
+            background-color: hsl(218, 41%, 15%);
+            background-image: radial-gradient(650px circle at 0% 0%, hsl(218, 41%, 35%) 15%, hsl(218, 41%, 30%) 35%, hsl(218, 41%, 20%) 75%, hsl(218, 41%, 19%) 80%, transparent 100%), radial-gradient(1250px circle at 100% 100%, hsl(218, 41%, 45%) 15%, hsl(218, 41%, 30%) 35%, hsl(218, 41%, 20%) 75%, hsl(218, 41%, 19%) 80%, transparent 100%);
+        }
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.UsernameOrEmail)
-        @Html.TextBoxFor(m => m.UsernameOrEmail, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.UsernameOrEmail)
-    </div>
+        .bg-glass {
+            background-color: hsla(0, 0%, 100%, 0.9) !important;
+            backdrop-filter: saturate(200%) blur(25px);
+        }
+    </style>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password)
-        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Password)
-    </div>
+    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+        <div class="row gx-lg-5 align-items-center mb-5">
+            <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+                <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+                    Welcome To FoodFUN! <br />
+                    <span style="color: hsl(218, 81%, 75%)">log in to continue</span>
+                </h1>
+            </div>
 
-    <div class="form-group">
-        @Html.CheckBoxFor(m => m.RememberMe)
-        @Html.LabelFor(m => m.RememberMe)
-    </div>
+            <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+                <div class="card bg-glass">
+                    <div class="card-body px-4 py-5 px-md-5">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
 
-    <div class="form-group">
-        <input type="submit" value="Log In" class="btn btn-primary" />
+                            <div class="form-group mb-4">
+                                @Html.LabelFor(m => m.UsernameOrEmail, new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.UsernameOrEmail, new { @class = "form-control", placeholder = "Username or Email" })
+                                @Html.ValidationMessageFor(m => m.UsernameOrEmail)
+                            </div>
+
+                            <div class="form-group mb-4">
+                                @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </div>
+
+                            <div class="form-check mb-4">
+                                <div class="d-flex align-items-center">
+                                    @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-check-input", id = "rememberMe" })
+                                    @Html.LabelFor(m => m.RememberMe, new { @class = "form-check-label", @for = "rememberMe" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block mb-4">log in</button>
+                            </div>
+
+
+                            <div class="text-center mt-3">
+                                <p>Don't have an account? <a href="/User/Register" class="text-primary">Sign Up</a></p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-}
+</section>
+<!-- Section: Design Block -->

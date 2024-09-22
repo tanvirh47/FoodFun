@@ -34,6 +34,26 @@
           <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
           <Property Name="ImageUrl" Type="nvarchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="OrderItems">
+          <Key>
+            <PropertyRef Name="OrderItemId" />
+          </Key>
+          <Property Name="OrderItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="FoodItemId" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="TotalPrice" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="Id" />
@@ -68,10 +88,48 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__OrderItem__FoodI__19DFD96B">
+          <End Role="FoodItems" Type="Self.FoodItems" Multiplicity="0..1" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="FoodItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderItem__Order__18EBB532">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__UserId__160F4887">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="FoodFunDBModelStoreContainer">
           <EntitySet Name="CartItems" EntityType="Self.CartItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Carts" EntityType="Self.Carts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FoodItems" EntityType="Self.FoodItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__CartItems__CartI__5FB337D6" Association="Self.FK__CartItems__CartI__5FB337D6">
             <End Role="Carts" EntitySet="Carts" />
@@ -80,6 +138,18 @@
           <AssociationSet Name="FK__CartItems__FoodI__60A75C0F" Association="Self.FK__CartItems__FoodI__60A75C0F">
             <End Role="FoodItems" EntitySet="FoodItems" />
             <End Role="CartItems" EntitySet="CartItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderItem__FoodI__19DFD96B" Association="Self.FK__OrderItem__FoodI__19DFD96B">
+            <End Role="FoodItems" EntitySet="FoodItems" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderItem__Order__18EBB532" Association="Self.FK__OrderItem__Order__18EBB532">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__UserId__160F4887" Association="Self.FK__Orders__UserId__160F4887">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -96,6 +166,7 @@
           <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="ImageUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CartItems" Relationship="FoodFunDBModel.FK__CartItems__FoodI__60A75C0F" FromRole="FoodItem" ToRole="CartItem" />
+          <NavigationProperty Name="OrderItems" Relationship="FoodFunDBModel.FK__OrderItem__FoodI__19DFD96B" FromRole="FoodItem" ToRole="OrderItem" />
         </EntityType>
         <EntityContainer Name="FoodFunDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="FoodItems" EntityType="Self.FoodItem" />
@@ -109,6 +180,20 @@
           <AssociationSet Name="FK__CartItems__FoodI__60A75C0F" Association="FoodFunDBModel.FK__CartItems__FoodI__60A75C0F">
             <End Role="FoodItem" EntitySet="FoodItems" />
             <End Role="CartItem" EntitySet="CartItems" />
+          </AssociationSet>
+          <EntitySet Name="OrderItems" EntityType="FoodFunDBModel.OrderItem" />
+          <EntitySet Name="Orders" EntityType="FoodFunDBModel.Order" />
+          <AssociationSet Name="FK__OrderItem__FoodI__19DFD96B" Association="FoodFunDBModel.FK__OrderItem__FoodI__19DFD96B">
+            <End Role="FoodItem" EntitySet="FoodItems" />
+            <End Role="OrderItem" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderItem__Order__18EBB532" Association="FoodFunDBModel.FK__OrderItem__Order__18EBB532">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderItem" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__UserId__160F4887" Association="FoodFunDBModel.FK__Orders__UserId__160F4887">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="CartItem">
@@ -142,6 +227,7 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="FoodFunDBModel.FK__Orders__UserId__160F4887" FromRole="User" ToRole="Order" />
         </EntityType>
         <Association Name="FK__CartItems__CartI__5FB337D6">
           <End Type="FoodFunDBModel.Cart" Role="Cart" Multiplicity="1" />
@@ -164,6 +250,66 @@
             </Principal>
             <Dependent Role="CartItem">
               <PropertyRef Name="FoodItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OrderItem">
+          <Key>
+            <PropertyRef Name="OrderItemId" />
+          </Key>
+          <Property Name="OrderItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="FoodItemId" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FoodItem" Relationship="FoodFunDBModel.FK__OrderItem__FoodI__19DFD96B" FromRole="OrderItem" ToRole="FoodItem" />
+          <NavigationProperty Name="Order" Relationship="FoodFunDBModel.FK__OrderItem__Order__18EBB532" FromRole="OrderItem" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="OrderItems" Relationship="FoodFunDBModel.FK__OrderItem__Order__18EBB532" FromRole="Order" ToRole="OrderItem" />
+          <NavigationProperty Name="User" Relationship="FoodFunDBModel.FK__Orders__UserId__160F4887" FromRole="Order" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__OrderItem__FoodI__19DFD96B">
+          <End Type="FoodFunDBModel.FoodItem" Role="FoodItem" Multiplicity="0..1" />
+          <End Type="FoodFunDBModel.OrderItem" Role="OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="FoodItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderItem__Order__18EBB532">
+          <End Type="FoodFunDBModel.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="FoodFunDBModel.OrderItem" Role="OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__UserId__160F4887">
+          <End Type="FoodFunDBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="FoodFunDBModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -213,6 +359,28 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderItems">
+            <EntityTypeMapping TypeName="FoodFunDBModel.OrderItem">
+              <MappingFragment StoreEntitySet="OrderItems">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="FoodItemId" ColumnName="FoodItemId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="FoodFunDBModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
